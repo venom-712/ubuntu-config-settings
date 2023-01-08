@@ -1,0 +1,42 @@
+# Ubuntu Dock to prevent till edge
+gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+
+
+# install zsh
+sudo apt install zsh
+sudo apt install git curl
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+# edit the .zshrc or .bashrc file and add the following command
+export HTTP_PROXY=http://172.16.2.11:3128
+export HTTPS_PROXY=http://172.16.2.11:3128
+
+# File : /etc/apt/apt.conf
+# If the file doesn't exist, create it and add these two lines in the apt.conf file: 
+Acquire::http::proxy "http://172.16.2.11:3128/";
+Acquire::https::proxy "http://172.16.2.11:3128/";
+
+
+# config snap proxy
+sudo snap set system proxy.http="http://172.16.2.10:3128"
+sudo snap set system proxy.https="http://172.16.2.10:3128"
+#-------unset snap proxy---------
+sudo snap unset system proxy.http
+sudo snap unset system proxy.https
+
+
+# nodejs package manager github
+# https://github.com/nodesource/distributions/blob/master/README.md
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+
+# Set and unset the npm proxy
+#------set---------
+sudo npm config set proxy http://proxy_host:port
+sudo npm config set https-proxy http://proxy_host:port
+# -----unset-----------
+sudo npm config rm proxy
+sudo npm config rm https-proxy
+sudo npm config --global rm proxy
+sudo npm config --global rm https-proxy
