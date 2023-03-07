@@ -19,8 +19,8 @@ Acquire::https::proxy "http://172.16.2.11:3128/";
 
 
 # config snap proxy
-sudo snap set system proxy.http="http://172.16.2.10:3128"
-sudo snap set system proxy.https="http://172.16.2.10:3128"
+sudo snap set system proxy.http="http://172.16.2.11:3128"
+sudo snap set system proxy.https="http://172.16.2.11:3128"
 #-------unset snap proxy---------
 sudo snap unset system proxy.http
 sudo snap unset system proxy.https
@@ -42,3 +42,16 @@ npm config rm proxy
 npm config rm https-proxy
 set HTTP_PROXY=null
 set HTTPS_PROXY=null
+
+
+
+# Java install and configs
+  sudo dpkg -i <jdk-package>
+  sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11/bin/java 1 
+  sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-11/bin/javac 1 
+  sudo update-alernatives --config java
+// copy the path before /bin/java
+// update the environment file
+  sudo gedit /etc/environment
+  JAVA_HOME="<copied path>"
+  source /etc/environment
